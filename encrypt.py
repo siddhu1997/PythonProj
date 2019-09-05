@@ -1,30 +1,31 @@
 import sys
 
-legend = {0:"A",1:"B",2:"C",3:"D",4:"E",5:"F",6:"G",7:"H",8:"I",9:"J",10:"K",11:"L",12:"M",13:"N",14:"O",15:"P",16:"Q",17:"R",18:"S",19:"T",20:"U",21:"V",22:"W",23:"X",24:"Y",25:"Z"}
-
-
 def additive():
 	print("Additive Cipher:")
 	key = int(input("Enter KEY: "))
 	print("\n"+str)
-	for i in range(0,len(str)):
-		if str[i] == " ":
-			print(str[i], end="")
+	for i in str.lower():
+		if i == " ":
+			print(i, end="")
 		else:	
-			i = (i+key)%26
-			print(legend[i], end="")
+			n = (ord(i)-ord("a"))
+			n = n+key
+			n = chr((n%26)+65)
+			print(n.upper(),end="")
 	print("\n")
 
 def multiply():
 	print("Multiplicative Cipher:")
 	key = int(input("Enter KEY: "))
 	print("\n"+str)
-	for i in range(0,len(str)):
-		if str[i] == " ":
-			print(str[i], end="")
+	for i in str.lower():
+		if i == " ":
+			print(i, end="")
 		else:	
-			i = (i*key)%26
-			print(legend[i], end="")
+			n = (ord(i)-ord("a"))
+			n = n*key
+			n = chr((n%26)+65)
+			print(n.upper(),end="")
 	print("\n")
 
 def affine():
@@ -45,6 +46,7 @@ def affine():
 
 def vignere():
 	print("Vignere Cipher: ")
+	str = input("Enter Plain Text")
 	key = input("Enter KEY: ")
 	i=0
 	print("\n"+str)
@@ -61,8 +63,12 @@ def vignere():
 
 if __name__ == "__main__":
 	str = sys.argv[1]
-	additive()
-	multiply()
-	affine()
-	vignere()
-
+	option = int(input("\nMENU:\nResults for 1.Additive\t2.Multiplicative\t3.Affine\nResult for 1.Vignere\nEnter your choice (1 for first group | 2 for second group):   "))
+	if option == 1:
+		additive()
+		multiply()
+		affine()
+	elif option == 2:
+		vignere()
+	else:
+		print("Invalid Option! Exiting Program")
